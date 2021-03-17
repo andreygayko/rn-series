@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     text: {
       maxWidth: '70%',
-    }, 
+    },
     item: {
         padding: 10,
     },

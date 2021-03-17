@@ -15,8 +15,7 @@ export default function App() {
     <View style={{flex: 1}}>
     <View style={styles.container}>
       {serials.map((el, i) => (<Serial key={i} title={el.title} episode={el.episode}/>))}
-      <TextInput placeholder='Title' style={{borderBottomColor: 'black', borderBottomWidth: 1, width: '50%', marginTop: 20, height: 22}}/>
-      
+      <TextInput placeholder='Title' style={{borderBottomColor: 'black', borderBottomWidth: 1, width: '50%', marginTop: 20, height: 22}}/>   
     </View>
     <View style={styles.btnAdd}>
       <RoundButton title='+' onPress={addSerial} />

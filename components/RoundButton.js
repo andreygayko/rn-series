@@ -11,7 +11,7 @@ export const RoundButton = (props) => {
         onPress={onPress}
         style={styles.roundBtn}>
           <Text style={{color: 'white', fontSize: 40}}>+</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
   )
 };
 
