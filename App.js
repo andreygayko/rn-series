@@ -8,7 +8,7 @@ export default function App() {
   const [serials, setSerials] = useState([{title: '', episode: 0}]);
 
   const addSerial = () => {
-     
+    
   }
   
   return (
