@@ -136,7 +136,7 @@ export default function App() {
         </View>
       </ScrollView>
 
-      {!newSerial &&
+      {!newSerial && !showMenu &&
         <View style={styles.btnAdd}>
           <RoundButton title='+' onPress={() => setNewSerial(true)}/>
         </View>
