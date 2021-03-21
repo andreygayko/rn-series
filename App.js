@@ -83,6 +83,11 @@ export default function App() {
   return (
     <View style={{flex: 1}}>
 
+      <Menu 
+        currentSelectionsNumber={selected.length}
+        allItemsNumber={serials.length}  
+      />
+
       <View style={styles.container}>
         {serials.map((el, i) => (
           <Serial 
@@ -119,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    marginTop: '10%',
+    marginTop: '2%',
   },
   btnAdd: {
     position: 'absolute',
