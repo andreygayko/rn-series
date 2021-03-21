@@ -100,45 +100,48 @@ export default function App() {
   };
   
   return (
-    <ScrollView style={{flex: 1}}>
+    <View style={{flex: 1}}>
 
       {showMenu && 
-      <Menu 
-        currentSelectionsNumber={selected.length}
-        allItemsNumber={serials.length}
-        cancelHandler={handleCloseMenu}
-        deleteHandler={handleDelete}  
-      />
+        <Menu 
+          style={{position: ''}}
+          currentSelectionsNumber={selected.length}
+          allItemsNumber={serials.length}
+          cancelHandler={handleCloseMenu}
+          deleteHandler={handleDelete}  
+        />
       }
 
-      <View style={styles.container}>
-        {serials.map((el, i) => (
-          <Serial 
-            key={i} 
-            title={el.title} 
-            episode={el.episode} 
-            index={i} 
-            handleAddEpisode={handleAddEpisode} 
-            handleSubstractEpisode={handleSubstractEpisode}
-            handleShowMenu={handleShowMenu}
-            showCheckBoxes={showMenu}
-            selected={selected.includes(i)}
-            onCheckBoxChange={onCheckBoxChange}/>))}
+      <ScrollView style={{flex: 1, marginBottom: '20%'}}>
+        <View style={styles.container}>
+          {serials.map((el, i) => (
+            <Serial 
+              key={i} 
+              title={el.title} 
+              episode={el.episode} 
+              index={i} 
+              handleAddEpisode={handleAddEpisode} 
+              handleSubstractEpisode={handleSubstractEpisode}
+              handleShowMenu={handleShowMenu}
+              showCheckBoxes={showMenu}
+              selected={selected.includes(i)}
+              onCheckBoxChange={onCheckBoxChange}/>))}
 
-        {newSerial && 
-          <View style={{width: '50%'}}>
-            <TextInput placeholder='Title' onChangeText={setTitle} style={{borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20, height: 22}}/>   
-            <Button title='Add' onPress={handleAddSerial}/>
-          </View>
-        }
-      </View>
+          {newSerial && 
+            <View style={{width: '50%'}}>
+              <TextInput placeholder='Title' onChangeText={setTitle} style={{borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20, height: 22}}/>   
+              <Button title='Add' onPress={handleAddSerial}/>
+            </View>
+          }
+        </View>
+      </ScrollView>
 
       {!newSerial &&
         <View style={styles.btnAdd}>
           <RoundButton title='+' onPress={() => setNewSerial(true)}/>
         </View>
       }
-    </ScrollView>
+    </View>
   );
 }
 
