@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Button, Alert, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { Serial } from './src/Serial';
@@ -100,7 +100,7 @@ export default function App() {
   };
   
   return (
-    <View style={{flex: 1}}>
+    <ScrollView style={{flex: 1}}>
 
       {showMenu && 
       <Menu 
@@ -138,7 +138,7 @@ export default function App() {
           <RoundButton title='+' onPress={() => setNewSerial(true)}/>
         </View>
       }
-    </View>
+    </ScrollView>
   );
 }
 
