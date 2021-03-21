@@ -75,6 +75,20 @@ export default function App() {
     setSelected([]);
   };
 
+  const handleDelete = () => {
+    const restSerilas = [...serials]
+    selected.forEach(el => {
+      try {
+        AsyncStorage.removeItem(serials[el].title);
+        restSerilas.splice(el, 1);   
+      } catch (e) {
+        Alert(e);
+      };
+    });
+    setSerials(restSerilas);
+    handleCloseMenu();
+  };
+
   const onCheckBoxChange = (index) => {
     const selectedItems = [...selected];
     if (selectedItems.includes(index)) {
@@ -92,7 +106,8 @@ export default function App() {
       <Menu 
         currentSelectionsNumber={selected.length}
         allItemsNumber={serials.length}
-        cancelHandler={handleCloseMenu}  
+        cancelHandler={handleCloseMenu}
+        deleteHandler={handleDelete}  
       />
       }
 
