@@ -1,17 +1,20 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, TouchableOpacity, CheckBox } from 'react-native';
 
 export const Serial = (props) => {
-  const {title, episode, handleAddEpisode, handleSubstractEpisode, index} = props;
+  const {title, episode, handleAddEpisode, handleSubstractEpisode, index, handleShowMenu, showCheckBoxes, selected, onCheckBoxChange} = props;
   
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, styles.item]}>{title}:</Text>
+      <TouchableOpacity onLongPress={() => handleShowMenu(index)} style={styles.text}>
+        <Text style={styles.item}>{title}:</Text>
+      </TouchableOpacity> 
       <View style={{ flexDirection: 'row'}}>
-      <Button title='-' onPress={() => handleSubstractEpisode(index)} style={styles.item}/>
-      <Text style={styles.item}>{episode}</Text>
-      <Button title='+' onPress={() => handleAddEpisode(index)} style={styles.item}/>
+        <Button title='-' onPress={() => handleSubstractEpisode(index)} style={styles.item}/>
+        <Text style={styles.item}>{episode}</Text>
+        <Button title='+' onPress={() => handleAddEpisode(index)} style={styles.item}/>
       </View>
+      {showCheckBoxes && <CheckBox value={selected} onValueChange={(event) => onCheckBoxChange(index)}/>}
     </View>
   )
 };

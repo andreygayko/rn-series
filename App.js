@@ -4,11 +4,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { Serial } from './src/Serial';
 import { RoundButton } from './src/RoundButton';
+import { Menu } from './src/Menu';
 
 export default function App() {
   const [serials, setSerials] = useState([]);
   const [newSerial, setNewSerial] = useState(false);
   const [title, setTitle] = useState('');
+  const [showMenu, setShowMenu] = useState(false);
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     AsyncStorage.getAllKeys().then((keys) => {
@@ -48,7 +51,7 @@ export default function App() {
     arr[index].episode++;
     setSerials(arr);
     saveSerial(arr[index].title, nextEpisode.toString());
-  }
+  };
 
   const handleSubstractEpisode = (index) => {
     const arr = [...serials];
@@ -56,25 +59,57 @@ export default function App() {
     arr[index].episode--;
     setSerials(arr);
     saveSerial(arr[index].title, nextEpisode);
-  }
+  };
+
+  const handleShowMenu = (index) => {
+    if (!showMenu) {
+    const selectedItems = [...selected];
+    selectedItems.push(index);
+    setSelected(selectedItems);
+    setShowMenu(true);
+    };
+  };
+
+  const onCheckBoxChange = (index) => {
+    const selectedItems = [...selected];
+    if (selectedItems.includes(index)) {
+      selectedItems.splice(selectedItems.indexOf(index), 1);
+    } else {
+      selectedItems.push(index);
+    };
+    setSelected(selectedItems);
+  };
   
   return (
     <View style={{flex: 1}}>
-    <View style={styles.container}>
-      {serials.map((el, i) => (<Serial key={i} title={el.title} episode={el.episode} index={i} handleAddEpisode={handleAddEpisode} handleSubstractEpisode={handleSubstractEpisode}/>))}
 
-      {newSerial && 
-      <View style={{width: '50%'}}>
-      <TextInput placeholder='Title' onChangeText={setTitle} style={{borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20, height: 22}}/>   
-      <Button title='Add' onPress={handleAddSerial}/>
-      </View>}
-    </View>
+      <View style={styles.container}>
+        {serials.map((el, i) => (
+          <Serial 
+            key={i} 
+            title={el.title} 
+            episode={el.episode} 
+            index={i} 
+            handleAddEpisode={handleAddEpisode} 
+            handleSubstractEpisode={handleSubstractEpisode}
+            handleShowMenu={handleShowMenu}
+            showCheckBoxes={showMenu}
+            selected={selected.includes(i)}
+            onCheckBoxChange={onCheckBoxChange}/>))}
 
-    {!newSerial &&
-    <View style={styles.btnAdd}>
-      <RoundButton title='+' onPress={() => setNewSerial(true)}/>
+        {newSerial && 
+          <View style={{width: '50%'}}>
+            <TextInput placeholder='Title' onChangeText={setTitle} style={{borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20, height: 22}}/>   
+            <Button title='Add' onPress={handleAddSerial}/>
+          </View>
+        }
       </View>
-    }
+
+      {!newSerial &&
+        <View style={styles.btnAdd}>
+          <RoundButton title='+' onPress={() => setNewSerial(true)}/>
+        </View>
+      }
     </View>
   );
 }
