@@ -70,6 +70,11 @@ export default function App() {
     };
   };
 
+  const handleCloseMenu = () => {
+    setShowMenu(false);
+    setSelected([]);
+  };
+
   const onCheckBoxChange = (index) => {
     const selectedItems = [...selected];
     if (selectedItems.includes(index)) {
@@ -83,10 +88,13 @@ export default function App() {
   return (
     <View style={{flex: 1}}>
 
+      {showMenu && 
       <Menu 
         currentSelectionsNumber={selected.length}
-        allItemsNumber={serials.length}  
+        allItemsNumber={serials.length}
+        cancelHandler={handleCloseMenu}  
       />
+      }
 
       <View style={styles.container}>
         {serials.map((el, i) => (
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    marginTop: '2%',
+    marginTop: '7%',
   },
   btnAdd: {
     position: 'absolute',
